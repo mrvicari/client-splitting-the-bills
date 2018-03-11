@@ -10,9 +10,9 @@ import { HouseComponent } from '../house/house.component';
 
 export class MessageComponent implements OnInit {
 
-  private house = this.houseComponent.house;
+  public house = this.houseComponent.house;
 
-  private message: String;
+  public message: String;
 
   constructor(private dataService: DataService, private houseComponent: HouseComponent) {
 

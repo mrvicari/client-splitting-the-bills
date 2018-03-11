@@ -10,7 +10,7 @@ import { HouseComponent } from '../house/house.component';
 
 export class PaymentComponent implements OnInit {
 
-  private house = this.houseComponent.house;
+  public house = this.houseComponent.house;
   private currentTenant: Tenant;
 
   private name: string;
@@ -20,7 +20,7 @@ export class PaymentComponent implements OnInit {
   private tenantEmail: string;
   private tenantObjects: Tenant[] = [];
 
-  private newPayment: boolean;
+  public newPayment: boolean;
 
   constructor(private dataService: DataService, private houseComponent: HouseComponent) {
 

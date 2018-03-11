@@ -18,8 +18,8 @@ export class ProfileComponent implements OnInit {
   private password: String;
   private confirmPassword: String;
 
-  private editTenantBool: boolean;
-  private editHouseBool: boolean;
+  public editTenantBool: boolean;
+  public editHouseBool: boolean;
 
   constructor(private tokenService: TokenService,
               private dataService: DataService,

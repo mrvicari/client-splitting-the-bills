@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
-  private showProfileBool: boolean;
-  private showHouseBool: boolean;
+  public showProfileBool: boolean;
+  public showHouseBool: boolean;
 
   constructor(private tokenService: TokenService, private router: Router) {
     this.showHouseBool = true;

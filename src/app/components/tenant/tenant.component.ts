@@ -10,10 +10,9 @@ import { HouseComponent } from '../house/house.component';
 
 export class TenantComponent implements OnInit {
 
-  private house = this.houseComponent.house;
+  public house = this.houseComponent.house;
 
-
-  private newTenant: boolean;
+  public newTenant: boolean;
 
   constructor(private dataService: DataService, private houseComponent: HouseComponent) {
 

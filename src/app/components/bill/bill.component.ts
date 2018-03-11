@@ -10,14 +10,14 @@ import { HouseComponent } from '../house/house.component';
 
 export class BillComponent implements OnInit {
 
-  private house = this.houseComponent.house;
+  public house = this.houseComponent.house;
 
   private name: string;
   private amount: number;
   private date: string;
   private period: string;
 
-  private newBill: boolean;
+  public newBill: boolean;
 
   constructor(private dataService: DataService, private houseComponent: HouseComponent) {
 
