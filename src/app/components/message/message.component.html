@@ -1,0 +1,18 @@
+<br>
+<form (ngSubmit)="sendMessage()" #messageForm="ngForm">
+  <div class="input-group">
+    <input type="text" class="form-control" #msg="ngModel" placeholder="New message..." [(ngModel)]="message" name="message" required>
+
+    <span class="input-group-btn">
+      <button class="btn btn-primary" type="submit" [disabled]="!messageForm.valid">Send</button>
+    </span>
+  </div>
+</form>
+
+<br>
+
+<div class="card" *ngFor="let message of house?.messages.reverse()">
+  <p class="text-muted">{{ message.date | date:'medium' }}</p>
+  <p><b>{{ message.tenant.name }}:</b> {{ message.message }}</p>
+  <hr>
+</div>

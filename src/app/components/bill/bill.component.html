@@ -1,0 +1,71 @@
+<br><br>
+
+<button type="button" class="btn btn-success btn-block" (click)="toggleNewBill()" data-toggle="button">New bill</button>
+
+<br>
+
+<form (ngSubmit)="createBill()" *ngIf="newBill" #billForm="ngForm" novalidate>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" #billName="ngModel" id="name" placeholder="Enter bill name" [(ngModel)]="name" name="name" minlength="3" maxlength="20" required>
+
+    <div *ngIf="billName.invalid && (billName.dirty || billName.touched)" class="alert alert-danger">
+      <p *ngIf="billName.errors?.required">Bill name field can't be empty</p>
+      <p *ngIf="billName.errors?.minlength">Bill name must be between 3 and 20 characters</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <div class="input-group">
+      <span class="input-group-addon">£</span>
+      <input type="number" class="form-control" #billAmount="ngModel" id="amount" placeholder="Enter bill amount" [(ngModel)]="amount" name="amount" min="0" required>
+    </div>
+
+    <div *ngIf="billAmount.invalid && (billAmount.dirty || billAmount.touched)" class="alert alert-danger">
+      <p *ngIf="billAmount.errors?.required">Bill amount field can't be empty</p>
+      <!-- <p *ngIf="billAmount?.value <= 0">Bill amount must be greater than 0</p> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="date" class="form-control" #billDate="ngModel" id="date" [(ngModel)]="date" name="date" required>
+
+    <div *ngIf="billDate.invalid && (billDate.dirty || billDate.touched)" class="alert alert-danger">
+      <p *ngIf="billDate.errors?.required">Bill date field can't be empty</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="period">Period</label>
+    <select class="form-control" #billPeriod="ngModel" id="period" [(ngModel)]="period" name="period" required>
+      <option value=1>Monthly</option>
+      <option value=3>Quarterly</option>
+      <option value=6>Biannually</option>
+      <option value=12>Annually</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary pull-right" [disabled]="!billForm.valid">Create bill</button>
+
+  <br><br><br><br>
+</form>
+
+<div class="card col-sm-6" *ngFor="let bill of house?.bills.reverse()">
+  <div class="card-shadow text-center">
+    <h2>{{ bill.name }}: {{ bill.amount | currency:'GBP':'symbol':'1.2' }}</h2>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <p><b>Last payment:</b></p>
+        <p>{{ bill.date | date:'longDate' }}</p>
+      </div>
+      <div class="col-sm-6">
+        <p><b>Next payment:</b></p>
+        <p>{{ bill.nextDate | date:'longDate' }}</p>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</div>

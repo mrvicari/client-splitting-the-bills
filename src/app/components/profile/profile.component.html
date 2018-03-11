@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="jumbotron text-center">
+    <h3><b>Profile</b></h3>
+  </div>
+
+  <button type="button" class="btn btn-success btn-block" (click)="toggleEditTenant()" data-toggle="button">Edit profile</button>
+
+  <br>
+
+  <div *ngIf="!editTenantBool">
+    <div class="col-sm-6">
+      <div class="page-header">
+        <h1>Tenant</h1>
+      </div>
+
+      <h3>Name</h3>
+      <p>{{ currentTenant.name }}</p>
+
+      <h3>Email</h3>
+      <p>{{ currentTenant.email }}</p>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="page-header">
+        <h1>House</h1>
+      </div>
+
+      <div *ngIf="house">
+        <h3>Name</h3>
+        <p>{{ house.name }}</p>
+
+        <h3>Keyphrase</h3>
+        <p>{{ keyphrase }}</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="editTenantBool">
+    <form (ngSubmit)="editTenant()" #profileForm="ngForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" #nameInput="ngModel" id="name" placeholder="Enter name" [(ngModel)]="currentTenant.name" name="name" required>
+
+        <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="alert alert-danger">
+          <p *ngIf="nameInput.errors?.required">Name field can't be empty</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input type="email" class="form-control" #emailInput="ngModel" id="emailInput" placeholder="Enter email" [(ngModel)]="currentTenant.email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+
+        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="alert alert-danger">
+          <p *ngIf = "emailInput.errors?.required">Email field can't be blank</p>
+          <p *ngIf = "emailInput.errors?.pattern && (emailInput.dirty || emailInput.touched)">Invalid email address</p>
+        </div>
+      </div>
+
+      <div ngModelGroup="password" #userPassword="ngModelGroup" required>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input type="password" class="form-control" ngModel id="passwordInput" placeholder="Password" [(ngModel)]="password" name="pwd" minlength="6" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPasswordInput">Confirm password</label>
+          <input type="password" class="form-control" ngModel id="confirmPasswordInput" placeholder="Password" [(ngModel)]="confirmPassword" name="confirmPwd" required>
+        </div>
+
+        <div *ngIf="(userPassword.invalid || userPassword.value?.pwd != userPassword.value?.confirmPwd) && (userPassword.touched)" class="alert alert-danger">
+          <p *ngIf = "userPassword.invalid; else nomatch">Password needs to be more than 6 characters</p>
+          <ng-template #nomatch>Passwords don't match</ng-template>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary pull-right" [disabled]="!profileForm.valid">Edit profile</button>
+
+      <br><br><br>
+
+      <button type="button" class="btn btn-danger btn-block" (click)="leaveHouse()" *ngIf="house">Leave house</button>
+
+      <br>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div *ngIf="house?.name; else noHouseBlock">
+  <div class="jumbotron text-center">
+    <h2><b>{{ house?.name }}</b></h2>
+  </div>
+
+  <div class="container">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="active"><a data-toggle="tab" href="#tenants">Tenants</a></li>
+      <li><a data-toggle="tab" href="#bills">Bills</a></li>
+      <li><a data-toggle="tab" href="#payments">Payments</a></li>
+      <li><a data-toggle="tab" href="#messages">Messages</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="tenants" class="tab-pane fade in active">
+        <app-tenant></app-tenant>
+      </div>
+
+      <div id="bills" class="tab-pane fade">
+        <app-bill></app-bill>
+      </div>
+
+      <div id="payments" class="tab-pane fade">
+        <app-payment></app-payment>
+      </div>
+
+      <div id="messages" class="tab-pane fade">
+        <app-message></app-message>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noHouseBlock>
+  <form (ngSubmit)="createHouse()" #createForm="ngForm" novalidate>
+    <div class="col-sm-6">
+      <h2 class="">Create a House</h2>
+
+      <br>
+
+      <label for="houseNameCreate">House name</label>
+      <input type="text" class="form-control" #createName="ngModel" id="houseNameCreate" placeholder="Enter a house name" [(ngModel)]="houseNameCreate" name="houseNameCreate" minlength="4" required>
+
+      <div *ngIf="createName.invalid && (createName.dirty || createName.touched)" class="alert alert-danger">
+        <p *ngIf="createName.errors?.required">House name field can't be empty</p>
+        <p *ngIf="createName.errors?.minlength">House name must be at least 4 characters</p>
+      </div>
+
+      <br>
+
+      <label for="keyphraseCreate">House keyphrase</label>
+      <input type="text" class="form-control" #createKey="ngModel" id="keyphraseCreate" placeholder="Enter a house keyphrase" [(ngModel)]="keyphraseCreate" name="keyphraseCreate" minlength="4" required>
+
+      <div *ngIf="createKey.invalid && (createKey.dirty || createKey.touched)" class="alert alert-danger">
+        <p *ngIf="createKey.errors?.required">House keyphrase field can't be empty</p>
+        <p *ngIf="createKey.errors?.minlength">House keyphrase must be at least 4 characters</p>
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary pull-right" type="submit" [disabled]="!createForm.valid">Create</button>
+    </div>
+  </form>
+
+  <div class="visible-xs">
+    <br><br><hr>
+  </div>
+
+  <form (ngSubmit)="joinHouse()" #joinForm="ngForm" novalidate>
+    <div class="col-sm-6">
+      <h2 class="">Join a House</h2>
+
+      <br>
+
+      <label for="houseNameJoin">House name</label>
+      <input type="text" class="form-control" #joinName="ngModel" id="houseNameJoin" placeholder="Enter a house name" [(ngModel)]="houseNameJoin" name="houseNameJoin" required>
+
+      <div *ngIf="joinName.invalid && (joinName.dirty || joinName.touched)" class="alert alert-danger">
+        <p *ngIf="joinName.errors?.required">House name field can't be empty</p>
+      </div>
+
+      <br>
+
+      <label for="keyphraseJoin">House keyphrase</label>
+      <input type="text" class="form-control" #joinKey="ngModel" id="keyphraseJoin" placeholder="Enter a house keyphrase" [(ngModel)]="keyphraseJoin" name="keyphraseJoin" required>
+
+      <div *ngIf="joinKey.invalid && (joinKey.dirty || joinKey.touched)" class="alert alert-danger">
+        <p *ngIf="joinKey.errors?.required">House keyphrase field can't be empty</p>
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary pull-right" (click)="joinHouse()" [disabled]="!joinForm.valid">Join</button>
+    </div>
+  </form>
+</ng-template>

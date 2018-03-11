@@ -1,0 +1,25 @@
+<br><br>
+
+<button class="btn btn-success btn-block" (click)="toggleNewTenant()" data-toggle="button">New tenant</button>
+
+<br>
+
+<div *ngIf="newTenant">
+  <div class="col-sm-6">
+    <h3>House name:</h3>
+    <p>{{ house.name }}</p>
+  </div>
+  <div class="col-sm-6">
+    <h3>House keyphrase:</h3>
+    <p>{{ keyphrase }}</p>
+  </div>
+  <br><br><br><br><br><br>
+</div>
+
+<div class="card col-sm-6" *ngFor="let tenant of house?.tenants">
+  <div class="card-shadow text-center">
+    <h2>{{ tenant.name }}: {{ tenant.balance | currency:'GBP':'symbol':'1.2' }}</h2>
+    <p>{{ tenant.email }}</p>
+  </div>
+  <br><br>
+</div>
