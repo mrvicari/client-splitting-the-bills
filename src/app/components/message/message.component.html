@@ -1,5 +1,5 @@
 <br>
-<form (ngSubmit)="sendMessage()" #messageForm="ngForm">
+<form (ngSubmit)="sendMessage(messageForm)" #messageForm="ngForm">
   <div class="input-group">
     <input type="text" class="form-control" #msg="ngModel" placeholder="New message..." [(ngModel)]="message" name="message" required>
 

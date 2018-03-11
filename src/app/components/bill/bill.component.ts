@@ -31,10 +31,23 @@ export class BillComponent implements OnInit {
     this.newBill = !this.newBill;
   }
 
-  createBill() {
+  createBill(billForm) {
     this.dataService.postResource(this.houseComponent.BASE_URL + 'bill/',
     {name: this.name, amount: this.amount, date: this.date, period: this.period});
 
-    location.reload();
+    billForm.reset();
+    this.newBill = false;
+
+    this.getHouse();
+    this.getHouse();
+    this.getHouse();
+  }
+
+  getHouse() {
+    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+      .subscribe(
+        data => this.house = data,
+        error => console.log('No house')
+      );
   }
 }

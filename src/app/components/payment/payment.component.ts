@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit {
     this.newPayment = !this.newPayment;
   }
 
-  createPayment() {
+  createPayment(paymentForm) {
     if (this.paymentType == 'SPLIT') {
       for (var email of this.tenantEmails) {
         for (var t of this.house.tenants) {
@@ -59,7 +59,20 @@ export class PaymentComponent implements OnInit {
     this.dataService.postResource(this.houseComponent.BASE_URL + 'payment/',
     {name: this.name, amount: this.amount, paymentType: this.paymentType, tenants: this.tenantObjects});
 
-    location.reload();
+    paymentForm.reset();
+    this.newPayment = false;
+
+    this.getHouse();
+    this.getHouse();
+    this.getHouse();
+  }
+
+  getHouse() {
+    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+      .subscribe(
+        data => this.house = data,
+        error => console.log('No house')
+      );
   }
 }
 

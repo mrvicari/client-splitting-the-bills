@@ -4,7 +4,7 @@
 
 <br>
 
-<form (ngSubmit)="createPayment()" *ngIf="newPayment" #paymentForm="ngForm" novalidate>
+<form (ngSubmit)="createPayment(paymentForm)" *ngIf="newPayment" #paymentForm="ngForm" novalidate>
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Enter payment name" [(ngModel)]="name" name="name" maxlength="15">

@@ -22,22 +22,17 @@ export class MessageComponent implements OnInit {
 
   }
 
-  sendMessage() {
+  sendMessage(messageForm) {
     this.dataService.postResource(this.houseComponent.BASE_URL + 'message/', {message: this.message});
 
-    // location.reload();
-    this.message = '';
+    messageForm.reset();
 
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
-      .subscribe(
-        data => this.house = data,
-        error => console.log('No house')
-      );
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
-      .subscribe(
-        data => this.house = data,
-        error => console.log('No house')
-      );
+    this.getHouse();
+    this.getHouse();
+    this.getHouse();
+  }
+
+  getHouse() {
     this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,

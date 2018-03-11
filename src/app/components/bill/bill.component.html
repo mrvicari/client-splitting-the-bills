@@ -4,7 +4,7 @@
 
 <br>
 
-<form (ngSubmit)="createBill()" *ngIf="newBill" #billForm="ngForm" novalidate>
+<form (ngSubmit)="createBill(billForm)" *ngIf="newBill" #billForm="ngForm" novalidate>
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" #billName="ngModel" id="name" placeholder="Enter bill name" [(ngModel)]="name" name="name" minlength="3" maxlength="20" required>

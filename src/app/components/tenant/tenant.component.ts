@@ -20,10 +20,22 @@ export class TenantComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.refreshData();
   }
 
   toggleNewTenant() {
     this.newTenant = !this.newTenant;
+  }
+
+  refreshData(){
+    setInterval(() => { this.getHouse(); }, 5000);
+  }
+
+  getHouse() {
+    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+      .subscribe(
+        data => this.house = data,
+        error => console.log('No house')
+      );
   }
 }
