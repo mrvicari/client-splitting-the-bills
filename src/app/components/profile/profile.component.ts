@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   private confirmPassword: String;
 
   private editTenantBool: boolean;
+  private editHouseBool: boolean;
 
   constructor(private tokenService: TokenService,
               private dataService: DataService,
@@ -46,19 +47,24 @@ export class ProfileComponent implements OnInit {
     this.editTenantBool = !this.editTenantBool;
   }
 
+  toggleEditHouse() {
+    this.editHouseBool = !this.editHouseBool;
+  }
+
   editTenant() {
-    if (this.password == this.confirmPassword) {
-      this.dataService.putResource(this.houseComponent.BASE_URL + 'tenant/', {
-        id: this.currentTenant.id, name: this.currentTenant.name, email: this.currentTenant.email, password: this.password
-      });
-    }
-    else {
-      this.password = '';
-      this.confirmPassword = '';
-      alert('Passwords do not match');
-    }
+    this.dataService.putResource(this.houseComponent.BASE_URL + 'tenant/', {
+      id: this.currentTenant.id, name: this.currentTenant.name, email: this.currentTenant.email, password: this.password
+    });
 
     this.tokenService.logout();
+  }
+
+  editHouse() {
+    this.dataService.putResource(this.houseComponent.BASE_URL + 'house/', {
+      name: this.house.name, keyphrase: this.house.keyphrase, nameKeyphrase: this.house.name + ':' + this.house.keyphrase
+    });
+
+    location.reload();
   }
 
   leaveHouse() {

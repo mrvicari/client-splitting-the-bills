@@ -3,11 +3,23 @@
     <h2><b>Profile</b></h2>
   </div>
 
-  <button type="button" class="btn btn-success btn-block" (click)="toggleEditTenant()" data-toggle="button">Edit profile</button>
+  <div class="col-sm-6" *ngIf="!editHouseBool">
+      <button type="button" class="btn btn-success btn-block" (click)="toggleEditTenant()" data-toggle="button">Edit tenant</button>
+  </div>
 
-  <br>
+  <div class="visible-xs">
+    <br>
+  </div>
 
-  <div *ngIf="!editTenantBool">
+  <div class="col-sm-6" *ngIf="editHouseBool">
+
+  </div>
+
+  <div class="col-sm-6" *ngIf="!editTenantBool">
+      <button type="button" class="btn btn-success btn-block" (click)="toggleEditHouse()" data-toggle="button">Edit house</button>
+  </div>
+
+  <div *ngIf="!editTenantBool && !editHouseBool">
     <div class="col-sm-6">
       <div class="page-header">
         <h1>Tenant</h1>
@@ -37,6 +49,10 @@
   </div>
 
   <div *ngIf="editTenantBool">
+    <div class="hidden-xs">
+      <br><br><br>
+    </div>
+
     <form (ngSubmit)="editTenant()" #profileForm="ngForm" novalidate>
       <div class="form-group">
         <label for="name">Name</label>
@@ -60,12 +76,12 @@
       <div ngModelGroup="password" #userPassword="ngModelGroup" required>
         <div class="form-group">
           <label for="passwordInput">Password</label>
-          <input type="password" class="form-control" ngModel id="passwordInput" placeholder="Password" [(ngModel)]="password" name="pwd" minlength="6" required>
+          <input type="password" class="form-control" ngModel id="passwordInput" placeholder="Password" [(ngModel)]="password" name="pwd" minlength="6">
         </div>
 
         <div class="form-group">
           <label for="confirmPasswordInput">Confirm password</label>
-          <input type="password" class="form-control" ngModel id="confirmPasswordInput" placeholder="Password" [(ngModel)]="confirmPassword" name="confirmPwd" required>
+          <input type="password" class="form-control" ngModel id="confirmPasswordInput" placeholder="Password" [(ngModel)]="confirmPassword" name="confirmPwd">
         </div>
 
         <div *ngIf="(userPassword.invalid || userPassword.value?.pwd != userPassword.value?.confirmPwd) && (userPassword.touched)" class="alert alert-danger">
@@ -74,13 +90,37 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary pull-right" [disabled]="!profileForm.valid">Edit profile</button>
-
-      <br><br><br>
-
-      <button type="button" class="btn btn-danger btn-block" (click)="leaveHouse()" *ngIf="house">Leave house</button>
-
-      <br>
+      <button type="submit" class="btn btn-primary pull-right" [disabled]="!profileForm.valid">Edit tenant</button>
     </form>
+  </div>
+
+  <div *ngIf="editHouseBool">
+    <br><br>
+
+    <form (ngSubmit)="editHouse()" #houseForm="ngForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" #houseName="ngModel" id="name" placeholder="Enter name" [(ngModel)]="house.name" name="houseName" required>
+
+        <div *ngIf="houseName.invalid && (houseName.dirty || houseName.touched)" class="alert alert-danger">
+          <p *ngIf="houseName.errors?.required">Name field can't be empty</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="keyphrase">Keyphrase</label>
+        <input type="text" class="form-control" #keyphrase="ngModel" id="name" placeholder="Enter keyphrase" [(ngModel)]="house.keyphrase" name="name" required>
+
+        <div *ngIf="keyphrase.invalid && (keyphrase.dirty || keyphrase.touched)" class="alert alert-danger">
+          <p *ngIf="keyphrase.errors?.required">Keyphrase field can't be empty</p>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary pull-right" [disabled]="!houseForm.valid">Edit house</button>
+    </form>
+
+    <br><br><br><br>
+
+    <button type="button" class="btn btn-danger btn-block" (click)="leaveHouse()" *ngIf="house">Leave house</button>
   </div>
 </div>
