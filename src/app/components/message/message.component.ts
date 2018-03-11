@@ -4,7 +4,6 @@ import { HouseComponent } from '../house/house.component';
 
 @Component({
   selector: 'app-message',
-  providers: [DataService],
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
@@ -28,7 +27,7 @@ export class MessageComponent implements OnInit {
 
     // location.reload();
     this.message = '';
-    
+
     this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,

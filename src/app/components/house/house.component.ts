@@ -3,15 +3,15 @@ import { Cookie } from 'ng2-cookies';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-house',
-  providers: [DataService],
+  selector: 'app-house'
   templateUrl: './house.component.html',
   styleUrls: ['./house.component.css']
 })
 
 export class HouseComponent implements OnInit {
 
-  public BASE_URL: string = 'http://10.41.7.143:8080/';
+  // public BASE_URL: string = 'http://10.41.7.143:8080/';
+  public BASE_URL: string = 'http://192.168.0.22:8080/';
 
   public house: House;
   private houseNameCreate: string;

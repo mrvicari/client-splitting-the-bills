@@ -4,7 +4,6 @@ import { HouseComponent } from '../house/house.component';
 
 @Component({
   selector: 'app-payment',
-  providers: [DataService],
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })

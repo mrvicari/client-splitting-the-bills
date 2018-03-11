@@ -37,6 +37,6 @@ export class DataService {
   }
 
   postRegister(data) {
-    return this.http.post('http://10.41.7.143:8080/register', data);
+    return this.http.post('http://192.168.0.22:8080/register', data);
   }
 }

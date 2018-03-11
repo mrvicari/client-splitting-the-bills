@@ -15,6 +15,8 @@ import { TenantComponent } from './components/tenant/tenant.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+import { TokenService } from './services/token.service';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { ProfileComponent } from './components/profile/profile.component';
       { path: 'register', component: RegisterComponent }
     ])
   ],
-  providers: [],
+  providers: [TokenService, DataService],
   bootstrap: [AppComponent]
 })
 

@@ -22,7 +22,7 @@ export class TokenService {
                                  'Authorization': 'Basic ' + btoa('trusted-client:secret')});
       let options = new RequestOptions({headers: headers});
 
-      this.http.post('http://10.41.7.143:8080/oauth/token', params.toString(), options)
+      this.http.post('http://192.168.0.22:8080/oauth/token', params.toString(), options)
         .map(res => res.json())
         .subscribe(
             data => this.saveToken(data),

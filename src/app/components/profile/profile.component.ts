@@ -6,7 +6,7 @@ import { HouseComponent } from '../house/house.component';
 
 @Component({
   selector: 'app-profile',
-  providers: [TokenService, DataService, HouseComponent],
+  providers: [HouseComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -35,13 +35,12 @@ export class ProfileComponent implements OnInit {
         data => this.house = data,
         error => console.log('No house')
       );
-      
-    console.log(this.house.nameKeyphrase);
-    // this.dataService.getResource(this.houseComponent.BASE_URL + 'tenant/')
-    //   .subscribe(
-    //     data => this.currentTenant = data,
-    //     error => console.log('No tenant')
-    //   );
+
+    this.dataService.getResource(this.houseComponent.BASE_URL + 'tenant/')
+      .subscribe(
+        data => this.currentTenant = data,
+        error => console.log('No tenant')
+      );
   }
 
   toggleEditTenant() {
