@@ -3,7 +3,7 @@ import { Cookie } from 'ng2-cookies';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-house'
+  selector: 'app-house',
   templateUrl: './house.component.html',
   styleUrls: ['./house.component.css']
 })
@@ -36,7 +36,7 @@ export class HouseComponent implements OnInit {
   }
 
   createHouse() {
-    this.dataService.postResource(this.BASE_URL + 'house/', {name: this.houseNameCreate, nameKeyphrase: this.houseNameCreate + ':' + this.keyphraseCreate});
+    this.dataService.postResource(this.BASE_URL + 'house/', {name: this.houseNameCreate, keyphrase: this.keyphraseCreate, nameKeyphrase: this.houseNameCreate + ':' + this.keyphraseCreate});
 
     location.reload();
   }
@@ -52,6 +52,7 @@ export class House {
   constructor(
     public id: number,
     public name: string,
+    public keyphrase: string,
     public nameKeyphrase: string,
     public tenants: Tenant[],
     public bills: Bill[],

@@ -11,7 +11,6 @@ import { HouseComponent } from '../house/house.component';
 export class TenantComponent implements OnInit {
 
   private house = this.houseComponent.house;
-  private keyphrase = this.house.nameKeyphrase.split(':')[1];
 
 
   private newTenant: boolean;
@@ -21,16 +20,10 @@ export class TenantComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.houseComponent.getHouse();
-    // this.house.nameKeyphrase.split(':')[1]);
-    this.refreshData();
+
   }
 
   toggleNewTenant() {
     this.newTenant = !this.newTenant;
-  }
-
-  refreshData(){
-    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
 }

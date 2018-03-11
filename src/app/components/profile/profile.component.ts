@@ -13,7 +13,6 @@ import { HouseComponent } from '../house/house.component';
 export class ProfileComponent implements OnInit {
 
   private house: House;
-  private keyphrase: String;
   private currentTenant: Tenant;
 
   private password: String;
@@ -73,7 +72,7 @@ export class House {
   constructor(
     public id: number,
     public name: string,
-    public nameKeyphrase: string
+    public keyphrase: string
   ) {}
 }
 

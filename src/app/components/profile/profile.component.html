@@ -1,6 +1,6 @@
 <div class="container">
   <div class="jumbotron text-center">
-    <h3><b>Profile</b></h3>
+    <h2><b>Profile</b></h2>
   </div>
 
   <button type="button" class="btn btn-success btn-block" (click)="toggleEditTenant()" data-toggle="button">Edit profile</button>
@@ -14,10 +14,10 @@
       </div>
 
       <h3>Name</h3>
-      <p>{{ currentTenant.name }}</p>
+      <p>{{ currentTenant?.name }}</p>
 
       <h3>Email</h3>
-      <p>{{ currentTenant.email }}</p>
+      <p>{{ currentTenant?.email }}</p>
     </div>
 
     <div class="col-sm-6">
@@ -27,10 +27,10 @@
 
       <div *ngIf="house">
         <h3>Name</h3>
-        <p>{{ house.name }}</p>
+        <p>{{ house?.name }}</p>
 
         <h3>Keyphrase</h3>
-        <p>{{ keyphrase }}</p>
+        <p>{{ house?.keyphrase }}</p>
       </div>
     </div>
 
