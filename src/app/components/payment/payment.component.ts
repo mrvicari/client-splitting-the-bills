@@ -27,7 +27,7 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'tenant/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'tenant/')
       .subscribe(
         data => this.currentTenant = data,
         error => console.log('No tenant')
@@ -56,7 +56,7 @@ export class PaymentComponent implements OnInit {
       }
     }
 
-    this.dataService.postResource(this.houseComponent.BASE_URL + 'payment/',
+    this.dataService.postResource(this.dataService.BASE_URL + 'payment/',
     {name: this.name, amount: this.amount, paymentType: this.paymentType, tenants: this.tenantObjects});
 
     paymentForm.reset();
@@ -68,7 +68,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getHouse() {
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,
         error => console.log('No house')

@@ -30,13 +30,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.tokenService.checkCredentials();
 
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,
         error => console.log('No house')
       );
 
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'tenant/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'tenant/')
       .subscribe(
         data => this.currentTenant = data,
         error => console.log('No tenant')
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editTenant() {
-    this.dataService.putResource(this.houseComponent.BASE_URL + 'tenant/', {
+    this.dataService.putResource(this.dataService.BASE_URL + 'tenant/', {
       id: this.currentTenant.id, name: this.currentTenant.name, email: this.currentTenant.email, password: this.password
     });
 
@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editHouse() {
-    this.dataService.putResource(this.houseComponent.BASE_URL + 'house/', {
+    this.dataService.putResource(this.dataService.BASE_URL + 'house/', {
       name: this.house.name, keyphrase: this.house.keyphrase, nameKeyphrase: this.house.name + ':' + this.house.keyphrase
     });
 
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
   }
 
   leaveHouse() {
-    this.dataService.putResource(this.houseComponent.BASE_URL + 'house/leave', {});
+    this.dataService.putResource(this.dataService.BASE_URL + 'house/leave', {});
 
     location.reload();
   }

@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { DataService } from './data.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TokenService {
 
-  constructor(private router: Router, private http: Http) {
+  constructor(private router: Router,
+              private http: Http,
+              private dataService: DataService) {
 
   }
 
@@ -22,7 +25,7 @@ export class TokenService {
                                  'Authorization': 'Basic ' + btoa('trusted-client:secret')});
       let options = new RequestOptions({headers: headers});
 
-      this.http.post('http://192.168.0.22:8080/oauth/token', params.toString(), options)
+      this.http.post(this.dataService.BASE_URL + 'oauth/token', params.toString(), options)
         .map(res => res.json())
         .subscribe(
             data => this.saveToken(data),

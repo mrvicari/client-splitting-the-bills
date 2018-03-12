@@ -9,6 +9,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
+  public BASE_URL: string = 'http://10.41.2.211:8080/';
+
   constructor(private http: Http) {
 
   }
@@ -37,6 +39,6 @@ export class DataService {
   }
 
   postRegister(data) {
-    return this.http.post('http://192.168.0.22:8080/register', data);
+    return this.http.post(this.BASE_URL + 'tenant/register', data);
   }
 }

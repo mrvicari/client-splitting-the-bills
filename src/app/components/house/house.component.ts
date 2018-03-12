@@ -10,9 +10,6 @@ import { DataService } from '../../services/data.service';
 
 export class HouseComponent implements OnInit {
 
-  // public BASE_URL: string = 'http://10.41.7.143:8080/';
-  public BASE_URL: string = 'http://192.168.0.22:8080/';
-
   public house: House;
   private houseNameCreate: string;
   private keyphraseCreate: string = '';
@@ -28,7 +25,7 @@ export class HouseComponent implements OnInit {
   }
 
   getHouse() {
-    this.dataService.getResource(this.BASE_URL + 'house/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,
         error => console.log('No house')
@@ -36,13 +33,13 @@ export class HouseComponent implements OnInit {
   }
 
   createHouse() {
-    this.dataService.postResource(this.BASE_URL + 'house/', {name: this.houseNameCreate, keyphrase: this.keyphraseCreate, nameKeyphrase: this.houseNameCreate + ':' + this.keyphraseCreate});
+    this.dataService.postResource(this.dataService.BASE_URL + 'house/', {name: this.houseNameCreate, keyphrase: this.keyphraseCreate, nameKeyphrase: this.houseNameCreate + ':' + this.keyphraseCreate});
 
     location.reload();
   }
 
   joinHouse() {
-    this.dataService.putResource(this.BASE_URL + 'house/' + this.houseNameJoin + '%3A' + this.keyphraseJoin + '/join', {});
+    this.dataService.putResource(this.dataService.BASE_URL + 'house/' + this.houseNameJoin + '%3A' + this.keyphraseJoin + '/join', {});
 
     location.reload();
   }

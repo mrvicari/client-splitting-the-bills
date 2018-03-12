@@ -23,7 +23,7 @@ export class MessageComponent implements OnInit {
   }
 
   sendMessage(messageForm) {
-    this.dataService.postResource(this.houseComponent.BASE_URL + 'message/', {message: this.message});
+    this.dataService.postResource(this.dataService.BASE_URL + 'message/', {message: this.message});
 
     messageForm.reset();
 
@@ -33,7 +33,7 @@ export class MessageComponent implements OnInit {
   }
 
   getHouse() {
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,
         error => console.log('No house')

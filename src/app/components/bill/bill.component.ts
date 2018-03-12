@@ -32,7 +32,7 @@ export class BillComponent implements OnInit {
   }
 
   createBill(billForm) {
-    this.dataService.postResource(this.houseComponent.BASE_URL + 'bill/',
+    this.dataService.postResource(this.dataService.BASE_URL + 'bill/',
     {name: this.name, amount: this.amount, date: this.date, period: this.period});
 
     billForm.reset();
@@ -44,7 +44,7 @@ export class BillComponent implements OnInit {
   }
 
   getHouse() {
-    this.dataService.getResource(this.houseComponent.BASE_URL + 'house/')
+    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
       .subscribe(
         data => this.house = data,
         error => console.log('No house')
