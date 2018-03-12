@@ -26,15 +26,7 @@ export class TenantComponent implements OnInit {
     this.newTenant = !this.newTenant;
   }
 
-  refreshData(){
-    setInterval(() => { this.getHouse(); }, 5000);
-  }
-
-  getHouse() {
-    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
-      .subscribe(
-        data => this.house = data,
-        error => console.log('No house')
-      );
+  refreshData() {
+    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
 }

@@ -27,6 +27,8 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.refreshData();
+
     this.dataService.getResource(this.dataService.BASE_URL + 'tenant/')
       .subscribe(
         data => this.currentTenant = data,
@@ -61,18 +63,10 @@ export class PaymentComponent implements OnInit {
 
     paymentForm.reset();
     this.newPayment = false;
-
-    this.getHouse();
-    this.getHouse();
-    this.getHouse();
   }
 
-  getHouse() {
-    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
-      .subscribe(
-        data => this.house = data,
-        error => console.log('No house')
-      );
+  refreshData() {
+    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
 }
 

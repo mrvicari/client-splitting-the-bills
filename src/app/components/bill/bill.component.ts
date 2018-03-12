@@ -24,7 +24,7 @@ export class BillComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.houseComponent.getHouse();
+    this.refreshData();
   }
 
   toggleNewBill() {
@@ -37,17 +37,9 @@ export class BillComponent implements OnInit {
 
     billForm.reset();
     this.newBill = false;
-
-    this.getHouse();
-    this.getHouse();
-    this.getHouse();
   }
 
-  getHouse() {
-    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
-      .subscribe(
-        data => this.house = data,
-        error => console.log('No house')
-      );
+  refreshData() {
+    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
 }

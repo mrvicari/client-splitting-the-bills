@@ -22,6 +22,7 @@ export class HouseComponent implements OnInit {
 
   ngOnInit() {
     this.getHouse();
+    this.refreshData();
   }
 
   getHouse() {
@@ -30,6 +31,10 @@ export class HouseComponent implements OnInit {
         data => this.house = data,
         error => console.log('No house')
       );
+  }
+
+  refreshData() {
+    setInterval(() => { this.getHouse(); }, 5000);
   }
 
   createHouse() {

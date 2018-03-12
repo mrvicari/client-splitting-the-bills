@@ -19,24 +19,16 @@ export class MessageComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.refreshData();
   }
 
   sendMessage(messageForm) {
     this.dataService.postResource(this.dataService.BASE_URL + 'message/', {message: this.message});
 
     messageForm.reset();
-
-    this.getHouse();
-    this.getHouse();
-    this.getHouse();
   }
-
-  getHouse() {
-    this.dataService.getResource(this.dataService.BASE_URL + 'house/')
-      .subscribe(
-        data => this.house = data,
-        error => console.log('No house')
-      );
+  
+  refreshData(){
+    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
 }
