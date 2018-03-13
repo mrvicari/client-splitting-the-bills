@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-  public BASE_URL: string = 'http://10.41.2.211:8080/';
+  public BASE_URL: string = 'http://splittingthebills.us-east-2.elasticbeanstalk.com/';
 
   constructor(private http: Http) {
 
