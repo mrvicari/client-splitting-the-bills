@@ -9,7 +9,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-  public BASE_URL: string = 'http://splittingthebills.us-east-2.elasticbeanstalk.com/';
+  // public BASE_URL: string = 'http://splittingthebills.us-east-2.elasticbeanstalk.com/';
+  public BASE_URL: string = 'http://10.41.2.127:8080/';
 
   constructor(private http: Http) {
 
@@ -36,6 +37,13 @@ export class DataService {
       let options = new RequestOptions({headers: headers});
 
       this.http.put(resourceURL, data, options).subscribe();
+  }
+
+  deleteResource(resourceURL) {
+    let headers = new Headers({'Authorization': 'Bearer ' + Cookie.get('access_token'), 'Content-type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    this.http.delete(resourceURL, options).subscribe();
   }
 
   postRegister(data) {

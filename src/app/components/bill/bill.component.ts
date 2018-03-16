@@ -58,12 +58,18 @@ export class BillComponent implements OnInit {
       }
     }
 
-    this.dataService.putResource(this.dataService.BASE_URL + 'bill/',
-    {id: this.editBill.id, name: this.editBill.name, amount: this.editBill.amount,
-     nextDate: this.editBill.nextDate, period: this.editBill.period, tenant: this.editBill.tenant});
+    this.dataService.putResource(this.dataService.BASE_URL + 'bill/' + String(this.editBill.id),
+    {name: this.editBill.name, amount: this.editBill.amount, nextDate: this.editBill.nextDate,
+     period: this.editBill.period, tenant: this.editBill.tenant});
 
      editBillForm.reset();
      this.editBillBool = false;
+  }
+
+  deleteBill(billId) {
+    this.dataService.deleteResource(this.dataService.BASE_URL + 'bill/' + String(billId));
+
+    this.editBillBool = false;
   }
 
   refreshData() {
