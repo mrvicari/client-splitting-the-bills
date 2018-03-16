@@ -121,6 +121,6 @@
 
     <br><br><br><br>
 
-    <button type="button" class="btn btn-danger btn-block" (click)="leaveHouse()" *ngIf="house">Leave house</button>
+    <button type="button" class="btn btn-danger btn-block" (click)="leaveHouse()" *ngIf="house" [disabled]="currentTenant.balance > 0.1 || currentTenant.balance < -0.1 || !canLeaveHouseBool">Leave house</button>
   </div>
 </div>

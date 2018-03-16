@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   public editTenantBool: boolean;
   public editHouseBool: boolean;
 
+  public canLeaveHouseBool: boolean;
+
   constructor(private tokenService: TokenService,
               private dataService: DataService,
               private houseComponent: HouseComponent) {
@@ -49,6 +51,8 @@ export class ProfileComponent implements OnInit {
 
   toggleEditHouse() {
     this.editHouseBool = !this.editHouseBool;
+
+    this.canLeaveHouse();
   }
 
   editTenant() {
@@ -67,6 +71,16 @@ export class ProfileComponent implements OnInit {
     location.reload();
   }
 
+  canLeaveHouse() {
+    this.canLeaveHouseBool = true;
+
+    for (var bill of this.house.bills) {
+      if (bill.tenant.id == this.currentTenant.id) {
+        this.canLeaveHouseBool = false;
+      }
+    }
+  }
+
   leaveHouse() {
     this.dataService.putResource(this.dataService.BASE_URL + 'house/leave', {});
 
@@ -78,7 +92,8 @@ export class House {
   constructor(
     public id: number,
     public name: string,
-    public keyphrase: string
+    public keyphrase: string,
+    public bills: Bill[],
   ) {}
 }
 
@@ -88,5 +103,12 @@ export class Tenant {
     public name: string,
     public email: string,
     public balance: number
+  ) {}
+}
+
+export class Bill {
+  constructor(
+    public id: number,
+    public tenant: Tenant
   ) {}
 }
