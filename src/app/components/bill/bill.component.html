@@ -57,11 +57,15 @@
     <h2>{{ bill.name }}: {{ bill.amount | currency:'GBP':'symbol':'1.2' }}</h2>
     <br>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
+        <p><b>Payer:</b></p>
+        <p>{{ bill.tenant.name }}</p>
+      </div>
+      <div class="col-sm-4">
         <p><b>Last payment:</b></p>
         <p>{{ bill.date | date:'longDate' }}</p>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-4">
         <p><b>Next payment:</b></p>
         <p>{{ bill.nextDate | date:'longDate' }}</p>
       </div>
