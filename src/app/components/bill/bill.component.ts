@@ -11,6 +11,7 @@ import { HouseComponent } from '../house/house.component';
 export class BillComponent implements OnInit {
 
   public house = this.houseComponent.house;
+  public editBill: Bill;
 
   private name: string;
   private amount: number;
@@ -18,6 +19,7 @@ export class BillComponent implements OnInit {
   private period: string;
 
   public newBill: boolean;
+  public editBillBool: boolean;
 
   constructor(private dataService: DataService, private houseComponent: HouseComponent) {
 
@@ -31,15 +33,61 @@ export class BillComponent implements OnInit {
     this.newBill = !this.newBill;
   }
 
+  toggleEditBill(billId) {
+    for (var bill of this.house.bills) {
+      if (bill.id == billId) {
+        this.editBill = bill;
+      }
+    }
+
+    this.editBillBool = true;
+  }
+
   createBill(billForm) {
     this.dataService.postResource(this.dataService.BASE_URL + 'bill/',
-    {name: this.name, amount: this.amount, date: this.date, period: this.period});
+    {name: this.name, amount: this.amount, nextDate: this.date, period: this.period});
 
     billForm.reset();
     this.newBill = false;
   }
 
+  editBillFunc(editBillForm) {
+    for (var t of this.house.tenants) {
+      if (this.editBill.tenant.email == t.email) {
+        this.editBill.tenant = t;
+      }
+    }
+
+    this.dataService.putResource(this.dataService.BASE_URL + 'bill/',
+    {id: this.editBill.id, name: this.editBill.name, amount: this.editBill.amount,
+     nextDate: this.editBill.nextDate, period: this.editBill.period, tenant: this.editBill.tenant});
+
+     editBillForm.reset();
+     this.editBillBool = false;
+  }
+
   refreshData() {
     setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
+}
+
+export class Bill {
+  constructor(
+    public id: number,
+    public name: string,
+    public amount: number,
+    public date: string,
+    public nextDate: string,
+    public period: string,
+    public tenant: Tenant
+  ) {}
+}
+
+export class Tenant {
+  constructor(
+    public id: number,
+    public name: string,
+    public email: string,
+    public balance: number
+  ) {}
 }

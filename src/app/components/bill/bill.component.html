@@ -1,6 +1,6 @@
 <br><br>
 
-<button type="button" class="btn btn-success btn-block" (click)="toggleNewBill()" data-toggle="button">New bill</button>
+<button type="button" class="btn btn-success btn-block" *ngIf="!editBillBool" (click)="toggleNewBill()" data-toggle="button">New bill</button>
 
 <br>
 
@@ -52,8 +52,68 @@
   <br><br><br><br>
 </form>
 
+<form (ngSubmit)="editBillFunc(editBillForm)" *ngIf="editBillBool" #editBillForm="ngForm" novalidate>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" #editBillName="ngModel" id="name" placeholder="Enter bill name" [(ngModel)]="editBill.name" name="name" minlength="3" maxlength="20" required>
+
+    <div *ngIf="editBillName.invalid && (editBillName.dirty || editBillName.touched)" class="alert alert-danger">
+      <p *ngIf="editBillName.errors?.required">Bill name field can't be empty</p>
+      <p *ngIf="editBillName.errors?.minlength">Bill name must be between 3 and 20 characters</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <div class="input-group">
+      <span class="input-group-addon">£</span>
+      <input type="number" class="form-control" #editBillAmount="ngModel" id="amount" placeholder="Enter bill amount" [(ngModel)]="editBill.amount" name="amount" min="0" required>
+    </div>
+
+    <div *ngIf="editBillAmount.invalid && (editBillAmount.dirty || editBillAmount.touched)" class="alert alert-danger">
+      <p *ngIf="editBillAmount.errors?.required">Bill amount field can't be empty</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="date" class="form-control" #editBillDate="ngModel" id="date" [(ngModel)]="editBill.nextDate" name="date" required>
+
+    <div *ngIf="editBillDate.invalid && (editBillDate.dirty || editBillDate.touched)" class="alert alert-danger">
+      <p *ngIf="editBillDate.errors?.required">Bill date field can't be empty</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="period">Period</label>
+    <select class="form-control" #editBillPeriod="ngModel" id="period" [(ngModel)]="editBill.period" name="period" required>
+      <option value=1>Monthly</option>
+      <option value=3>Quarterly</option>
+      <option value=6>Biannually</option>
+      <option value=12>Annually</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="payer">Payer</label>
+    <select class="form-control" #editBillPayer="ngModel" id="payer" [(ngModel)]="editBill.tenant.email" name="payer" required>
+      <ng-container *ngFor="let tenant of house.tenants">
+        <option value="{{ tenant.email }}">{{ tenant.name }}</option>
+      </ng-container>
+    </select>
+  </div>
+
+  <div class="pull-right">
+    <button type="submit" class="btn btn-default" (click)="editBillBool=false">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!editBillForm.valid">Edit bill</button>
+  </div>
+
+  <br><br><br><br>
+</form>
+
 <div class="card col-sm-6" *ngFor="let bill of house?.bills.reverse()">
-  <div class="card-shadow text-center">
+  <div class="card-shadow text-center" (click)="toggleEditBill(bill.id)">
+    <!-- <button type="button" class="btn btn-block btn-sm btn-warning" (click)="toggleEditBill(bill.id)">Edit</button> -->
     <h2>{{ bill.name }}: {{ bill.amount | currency:'GBP':'symbol':'1.2' }}</h2>
     <br>
     <div class="row">
