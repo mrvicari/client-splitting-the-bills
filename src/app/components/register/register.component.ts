@@ -24,8 +24,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.dataService.postRegister({name: this.name, email: this.email, password: this.password}).subscribe();
-
-    this.router.navigate(['/login']);
+    this.dataService.postRegister({name: this.name, email: this.email, password: this.password}).subscribe(
+      data => this.router.navigate(['/login']),
+      error => alert(error.json().message)
+    );
   }
 }

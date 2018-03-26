@@ -38,15 +38,17 @@ export class HouseComponent implements OnInit {
   }
 
   createHouse() {
-    this.dataService.postResource(this.dataService.BASE_URL + 'house/', {name: this.houseNameCreate, keyphrase: this.keyphraseCreate, nameKeyphrase: this.houseNameCreate + ':' + this.keyphraseCreate});
-
-    location.reload();
+    this.dataService.postResource(this.dataService.BASE_URL + 'house/', {name: this.houseNameCreate, keyphrase: this.keyphraseCreate, nameKeyphrase: this.houseNameCreate + ':' + this.keyphraseCreate}).subscribe(
+      data => location.reload(),
+      error => alert(error.json().message)
+    );
   }
 
   joinHouse() {
-    this.dataService.putResource(this.dataService.BASE_URL + 'house/' + this.houseNameJoin + '%3A' + this.keyphraseJoin + '/join', {});
-
-    location.reload();
+    this.dataService.putResource(this.dataService.BASE_URL + 'house/' + this.houseNameJoin + '%3A' + this.keyphraseJoin + '/join', {}).subscribe(
+      data => location.reload(),
+      error => alert(error.json().message)
+    );
   }
 }
 

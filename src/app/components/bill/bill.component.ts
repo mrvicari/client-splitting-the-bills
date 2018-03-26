@@ -45,10 +45,13 @@ export class BillComponent implements OnInit {
 
   createBill(billForm) {
     this.dataService.postResource(this.dataService.BASE_URL + 'bill/',
-    {name: this.name, amount: this.amount, nextDate: this.date, period: this.period});
-
-    billForm.reset();
-    this.newBill = false;
+    {name: this.name, amount: this.amount, nextDate: this.date, period: this.period}).subscribe(
+      data => {
+        billForm.reset();
+        this.newBill = false
+      },
+      error => alert(error.json().message)
+    );
   }
 
   editBillFunc(editBillForm) {
@@ -60,10 +63,13 @@ export class BillComponent implements OnInit {
 
     this.dataService.putResource(this.dataService.BASE_URL + 'bill/' + String(this.editBill.id),
     {name: this.editBill.name, amount: this.editBill.amount, nextDate: this.editBill.nextDate,
-     period: this.editBill.period, tenant: this.editBill.tenant});
-
-     editBillForm.reset();
-     this.editBillBool = false;
+     period: this.editBill.period, tenant: this.editBill.tenant}).subscribe(
+       data => {
+         editBillForm.reset();
+         this.editBillBool = false
+       },
+       error => alert(error.json().message)
+     );
   }
 
   deleteBill(billId) {

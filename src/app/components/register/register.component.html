@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary pull-right" [disabled]="!registerForm.valid">Register</button>
+    <button type="submit" class="btn btn-primary pull-right" [disabled]="!registerForm.valid || userPassword.value?.pwd != userPassword.value?.confirmPwd">Register</button>
   </form>
 
   <br><br><hr>

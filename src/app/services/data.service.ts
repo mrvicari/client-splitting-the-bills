@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class DataService {
 
   // public BASE_URL: string = 'http://splittingthebills.us-east-2.elasticbeanstalk.com/';
-  public BASE_URL: string = 'http://10.41.2.127:8080/';
+  public BASE_URL: string = 'http://10.41.1.5:8080/';
 
   constructor(private http: Http) {
 
@@ -29,14 +29,14 @@ export class DataService {
       let headers = new Headers({'Authorization': 'Bearer ' + Cookie.get('access_token'), 'Content-type': 'application/json'});
       let options = new RequestOptions({headers: headers});
 
-      this.http.post(resourceURL, data, options).subscribe();
+      return this.http.post(resourceURL, data, options);
   }
 
   putResource(resourceURL, data) {
       let headers = new Headers({'Authorization': 'Bearer ' + Cookie.get('access_token'), 'Content-type': 'application/json'});
       let options = new RequestOptions({headers: headers});
 
-      this.http.put(resourceURL, data, options).subscribe();
+      return this.http.put(resourceURL, data, options);
   }
 
   deleteResource(resourceURL) {

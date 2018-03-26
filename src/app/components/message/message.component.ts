@@ -23,11 +23,12 @@ export class MessageComponent implements OnInit {
   }
 
   sendMessage(messageForm) {
-    this.dataService.postResource(this.dataService.BASE_URL + 'message/', {message: this.message});
-
-    messageForm.reset();
+    this.dataService.postResource(this.dataService.BASE_URL + 'message/', {message: this.message}).subscribe(
+      data => messageForm.reset(),
+      error => alert(error.json().message)
+    );
   }
-  
+
   refreshData(){
     setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }

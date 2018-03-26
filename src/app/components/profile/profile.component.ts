@@ -58,17 +58,19 @@ export class ProfileComponent implements OnInit {
   editTenant() {
     this.dataService.putResource(this.dataService.BASE_URL + 'tenant/', {
       id: this.currentTenant.id, name: this.currentTenant.name, email: this.currentTenant.email, password: this.password
-    });
-
-    this.tokenService.logout();
+    }).subscribe(
+      data => this.tokenService.logout(),
+      error => alert(error.json().message)
+    );
   }
 
   editHouse() {
     this.dataService.putResource(this.dataService.BASE_URL + 'house/', {
       name: this.house.name, keyphrase: this.house.keyphrase, nameKeyphrase: this.house.name + ':' + this.house.keyphrase
-    });
-
-    location.reload();
+    }).subscribe(
+      data => location.reload(),
+      error => alert(error.json().message)
+    );
   }
 
   canLeaveHouse() {
@@ -82,9 +84,10 @@ export class ProfileComponent implements OnInit {
   }
 
   leaveHouse() {
-    this.dataService.putResource(this.dataService.BASE_URL + 'house/leave', {});
-
-    location.reload();
+    this.dataService.putResource(this.dataService.BASE_URL + 'house/leave', {}).subscribe(
+      data => location.reload(),
+      error => alert(error.json().message)
+    );
   }
 }
 

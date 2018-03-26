@@ -59,10 +59,15 @@ export class PaymentComponent implements OnInit {
     }
 
     this.dataService.postResource(this.dataService.BASE_URL + 'payment/',
-    {name: this.name, amount: this.amount, paymentType: this.paymentType, tenants: this.tenantObjects});
-
-    paymentForm.reset();
-    this.newPayment = false;
+    {name: this.name, amount: this.amount, paymentType: this.paymentType, tenants: this.tenantObjects}).subscribe(
+      data => {
+        this.tenantEmails = [];
+        this.tenantObjects = [];
+        paymentForm.reset();
+        this.newPayment = false;
+      },
+      error => alert(error.json().message)
+    );
   }
 
   refreshData() {
