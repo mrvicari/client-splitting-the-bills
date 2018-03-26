@@ -59,6 +59,7 @@
         <th>Amount</th>
         <th>Paid by / From</th>
         <th>Paid for / To</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -71,6 +72,9 @@
         <td>{{ payment.payer.name }}</td>
         <td>
           <p *ngFor="let debtor of payment.tenants">{{ debtor.name }}</p>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-danger" (click)="deletePayment(payment.id)" [disabled]="payment?.payer.name != currentTenant?.name || payment?.paymentType == 'BILL'">X</button>
         </td>
       </tr>
     </tbody>

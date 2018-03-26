@@ -70,6 +70,10 @@ export class PaymentComponent implements OnInit {
     );
   }
 
+  deletePayment(paymentId) {
+    this.dataService.deleteResource(this.dataService.BASE_URL + 'payment/' + String(paymentId));
+  }
+
   refreshData() {
     setInterval(() => { this.house = this.houseComponent.house; }, 5000);
   }
