@@ -16,7 +16,7 @@
   </div>
 
   <div class="col-sm-6" *ngIf="!editTenantBool">
-      <button type="button" class="btn btn-success btn-block" (click)="toggleEditHouse()" data-toggle="button">Edit house</button>
+      <button type="button" class="btn btn-success btn-block" (click)="toggleEditHouse()" data-toggle="button" [disabled]="!house">Edit house</button>
   </div>
 
   <div *ngIf="!editTenantBool && !editHouseBool">
