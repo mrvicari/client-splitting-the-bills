@@ -15,6 +15,7 @@ export class HouseComponent implements OnInit {
   private keyphraseCreate: string = '';
   private houseNameJoin: string;
   private keyphraseJoin: string = '';
+  private codeJoin: string = '';
 
   constructor(private dataService: DataService) {
 
@@ -44,8 +45,15 @@ export class HouseComponent implements OnInit {
     );
   }
 
-  joinHouse() {
+  joinHouseKeyphrase() {
     this.dataService.putResource(this.dataService.BASE_URL + 'house/' + this.houseNameJoin + '%3A' + this.keyphraseJoin + '/join', {}).subscribe(
+      data => location.reload(),
+      error => alert(error.json().message)
+    );
+  }
+
+  joinHouseCode() {
+    this.dataService.putResource(this.dataService.BASE_URL + 'house/' + this.codeJoin + '/join', {}).subscribe(
       data => location.reload(),
       error => alert(error.json().message)
     );
@@ -58,6 +66,7 @@ export class House {
     public name: string,
     public keyphrase: string,
     public nameKeyphrase: string,
+    public code: string,
     public tenants: Tenant[],
     public bills: Bill[],
     public payments: Payment[],

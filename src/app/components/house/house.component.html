@@ -73,24 +73,32 @@
       <br>
 
       <label for="houseNameJoin">House name</label>
-      <input type="text" class="form-control" #joinName="ngModel" id="houseNameJoin" placeholder="Enter a house name" [(ngModel)]="houseNameJoin" name="houseNameJoin" required>
+      <input type="text" class="form-control" #joinName="ngModel" id="houseNameJoin" placeholder="Enter a house name" [(ngModel)]="houseNameJoin" name="houseNameJoin">
 
-      <div *ngIf="joinName.invalid && (joinName.dirty || joinName.touched)" class="alert alert-danger">
+      <!-- <div *ngIf="joinName.invalid && (joinName.dirty || joinName.touched)" class="alert alert-danger">
         <p *ngIf="joinName.errors?.required">House name field can't be empty</p>
-      </div>
+      </div> -->
 
       <br>
 
       <label for="keyphraseJoin">House keyphrase</label>
-      <input type="text" class="form-control" #joinKey="ngModel" id="keyphraseJoin" placeholder="Enter a house keyphrase" [(ngModel)]="keyphraseJoin" name="keyphraseJoin" required>
+      <input type="text" class="form-control" #joinKey="ngModel" id="keyphraseJoin" placeholder="Enter a house keyphrase" [(ngModel)]="keyphraseJoin" name="keyphraseJoin">
 
-      <div *ngIf="joinKey.invalid && (joinKey.dirty || joinKey.touched)" class="alert alert-danger">
+      <!-- <div *ngIf="joinKey.invalid && (joinKey.dirty || joinKey.touched)" class="alert alert-danger">
         <p *ngIf="joinKey.errors?.required">House keyphrase field can't be empty</p>
-      </div>
+      </div> -->
 
       <br>
 
-      <button class="btn btn-primary pull-right" (click)="joinHouse()" [disabled]="!joinForm.valid">Join</button>
+      <label for="codeJoin">House code</label>
+      <input type="text" class="form-control" #joinCode="ngModel" id="codeJoin" placeholder="Enter a house code" [(ngModel)]="codeJoin" name="codeJoin">
+
+      <br>
+
+      <div class="pull-right">
+        <button class="btn btn-primary" (click)="joinHouseKeyphrase()" [disabled]="!joinForm.valid || houseNameJoin == '' || keyphraseJoin == ''">Join by keyphrase</button>
+        <button class="btn btn-primary" (click)="joinHouseCode()" [disabled]="!joinForm.valid || codeJoin == ''">Join by code</button>
+      </div>
     </div>
   </form>
 </ng-template>

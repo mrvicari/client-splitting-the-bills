@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class DataService {
 
   // public BASE_URL: string = 'http://splittingthebills.us-east-2.elasticbeanstalk.com/';
-  public BASE_URL: string = 'http://10.41.1.5:8080/';
+  public BASE_URL: string = 'http://10.41.7.90:8080/';
 
   constructor(private http: Http) {
 
