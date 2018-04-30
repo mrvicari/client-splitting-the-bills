@@ -11,6 +11,7 @@ import { HouseComponent } from '../house/house.component';
 export class MessageComponent implements OnInit {
 
   public house = this.houseComponent.house;
+  public messages: Message[];
 
   public message: String;
 
@@ -27,9 +28,32 @@ export class MessageComponent implements OnInit {
       data => messageForm.reset(),
       error => alert(error.json().message)
     );
+
+    this.refreshData();
   }
 
   refreshData(){
-    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
+    setInterval(() => {
+      this.house = this.houseComponent.house;
+      this.messages = this.house.messages.slice().reverse();
+    }, 5000);
   }
+}
+
+export class Message {
+  constructor(
+    public id: number,
+    public date: string,
+    public message: string,
+    public tenant: Tenant,
+  ) {}
+}
+
+export class Tenant {
+  constructor(
+    public id: number,
+    public name: string,
+    public email: string,
+    public balance: number
+  ) {}
 }

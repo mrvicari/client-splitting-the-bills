@@ -12,6 +12,7 @@ export class PaymentComponent implements OnInit {
 
   public house = this.houseComponent.house;
   private currentTenant: Tenant;
+  public payments: Payment[];
 
   private name: string;
   private amount: number;
@@ -75,7 +76,10 @@ export class PaymentComponent implements OnInit {
   }
 
   refreshData() {
-    setInterval(() => { this.house = this.houseComponent.house; }, 5000);
+    setInterval(() => {
+      this.house = this.houseComponent.house;
+      this.payments = this.house.payments.slice().reverse();
+    }, 5000);
   }
 }
 
@@ -85,5 +89,17 @@ export class Tenant {
     public name: string,
     public email: string,
     public balance: number
+  ) {}
+}
+
+export class Payment {
+  constructor(
+    public id: number,
+    public name: string,
+    public amount: number,
+    public date: string,
+    public paymentType: string,
+    public payer: Tenant,
+    public tenants: Tenant[]
   ) {}
 }

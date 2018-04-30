@@ -11,7 +11,7 @@
 
 <br>
 
-<div class="card" *ngFor="let message of house?.messages.reverse()">
+<div class="card" *ngFor="let message of messages">
   <p class="text-muted">{{ message.date | date:'medium' }}</p>
   <p style="word-wrap:break-word;"><b>{{ message.tenant.name }}:</b> {{ message.message }}</p>
   <hr>
