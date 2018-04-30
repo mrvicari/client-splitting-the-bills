@@ -114,9 +114,9 @@
   <br><br><br><br>
 </form>
 
-<div class="card col-sm-6" *ngFor="let bill of house?.bills.reverse()">
+
+<div class="card col-sm-6 pointer" *ngFor="let bill of house?.bills">
   <div class="card-shadow text-center" (click)="toggleEditBill(bill.id)">
-    <!-- <button type="button" class="btn btn-block btn-sm btn-warning" (click)="toggleEditBill(bill.id)">Edit</button> -->
     <h2>{{ bill.name }}: {{ bill.amount | currency:'GBP':'symbol':'1.2' }}</h2>
     <br>
     <div class="row">
